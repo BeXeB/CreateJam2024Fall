@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,6 +32,13 @@ public class PlayerMovement : MonoBehaviour
     private float maxFallSpeed = 18f;
     [SerializeField]
     private float fallSpeedMultiplier = 2f;
+
+    private PlayerInput playerInput;
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -73,6 +81,13 @@ public class PlayerMovement : MonoBehaviour
                 jumpsRemaining--;
             }
         }
+    }
+
+    public IEnumerator Stun(float stunDuration)
+    {
+        playerInput.DeactivateInput();
+        yield return new WaitForSeconds(stunDuration);
+        playerInput.ActivateInput();
     }
 
     private void GroundCheck()
