@@ -1,38 +1,31 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CapturableEnemy : MonoBehaviour
+public class CapturableEnemy : EnemyBase
 {
-    [SerializeField] private EnemyController enemyController;
+    [SerializeField] private FlyBase flyBase;
     
     private void Awake()
     {
-        if (enemyController == null)
+        if (!flyBase)
         {
-            enemyController = GetComponent<EnemyController>();
+            flyBase = GetComponent<FlyBase>();
         }
     }
-    
+
     public void StartCapture()
     {
-        //freeze the enemy
+        flyBase.enabled = false;
+        //TODO: Make the enemy follow the player while being captured
     }
     
     public void StopCapture()
     {
-        //unfreeze the enemy
+        flyBase.enabled = true;
+        //TODO: Make the enemy stop following the player
     }
     
     public void EndCapture()
     {
-        enemyController.TakeDamage(1);
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (!other.gameObject.CompareTag("Player")) return;
-        //stun player 
+        TakeDamage(health);
     }
 }

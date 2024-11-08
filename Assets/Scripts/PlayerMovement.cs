@@ -84,6 +84,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void StartStun(float stunDuration)
+    {
+        StartCoroutine(Stun(stunDuration));
+    }
+    
     public IEnumerator Stun(float stunDuration)
     {
         playerInput.DeactivateInput();

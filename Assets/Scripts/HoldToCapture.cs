@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HoldToCapture : MonoBehaviour
@@ -12,8 +9,8 @@ public class HoldToCapture : MonoBehaviour
     [SerializeField] private Image fillCircle;
     private CapturableEnemy capturableEnemy;
 
-    private float holdTimer = 0;
-    private bool isHolding = false;
+    private float holdTimer;
+    private bool isHolding;
 
     public static event Action OnHoldComplete;
     
@@ -27,6 +24,7 @@ public class HoldToCapture : MonoBehaviour
             {
                 OnHoldComplete?.Invoke();
                 ResetHold();
+                capturableEnemy = null;
             }
         }
     }
@@ -36,16 +34,13 @@ public class HoldToCapture : MonoBehaviour
         if (context.started)
         {
             isHolding = true;
-            if (capturableEnemy == null) return;
+            if (!capturableEnemy) return;
             capturableEnemy.StartCapture();
             OnHoldComplete += capturableEnemy.EndCapture;
         }
         else if (context.canceled)
         {
             ResetHold();
-            if (capturableEnemy == null) return;
-            OnHoldComplete -= capturableEnemy.EndCapture;
-            capturableEnemy.StopCapture();
         }
     }
 
@@ -54,6 +49,8 @@ public class HoldToCapture : MonoBehaviour
         isHolding = false;
         holdTimer = 0;
         fillCircle.fillAmount = 0;
+        OnHoldComplete = null;
+        capturableEnemy?.StopCapture();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
