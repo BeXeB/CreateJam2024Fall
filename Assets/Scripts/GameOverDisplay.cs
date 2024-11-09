@@ -22,7 +22,9 @@ public class GameOverDisplay : MonoBehaviour
 
     private void HandleButtonPressed()
     {
-        SceneManager.LoadScene(0);
+        AudioMananger.instance.StopMusicClip();
+        AudioMananger.instance.PlayMusicClip("Menu");
+        SceneManager.LoadScene("Menu");
     }
 
     private void HandleSaveButtonPressed()

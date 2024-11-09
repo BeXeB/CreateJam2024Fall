@@ -1003,6 +1003,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpPower: 10
   maxJumps: 2
+  animator: {fileID: 0}
   groundCheckPosition: {fileID: 703114307}
   groundCheckSize: {x: 1, y: 0.05}
   groundLayer:
@@ -1542,9 +1543,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add9b2c2e7ecd9f49a419eaaecdbb7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 20
+  startTime: 200
   timerTxt: {fileID: 776833714}
   timerSlider: {fileID: 1696838673}
+  gameOverPanel: {fileID: 917235129}
+  player: {fileID: 296520619}
 --- !u!114 &651831785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1935,7 +1938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &680069546
@@ -3993,6 +3996,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 8558220595158946890, guid: 685a1e0744f53c94db862032f5bcd1d3, type: 3}
+  - {fileID: 4704371621259957913, guid: 5627852d640ebd84baf6e4c053e4dacc, type: 3}
+  - {fileID: 6705756411389019598, guid: 775550a927f7e00438afe88c408b0890, type: 3}
+  - {fileID: 7016003209462154961, guid: 3eb9a9eb3624586478659d4438d33b87, type: 3}
   spawnPoints:
   - {fileID: 62627376}
   - {fileID: 1158819568}

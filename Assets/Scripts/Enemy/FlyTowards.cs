@@ -51,6 +51,7 @@ public class FlyTowards : FlyBase
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            AudioMananger.instance.PlayAudioClip("Ghost");
             hasHitPlayer = true;
         }
     }

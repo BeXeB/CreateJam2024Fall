@@ -16,10 +16,16 @@ public class PlayerStats : MonoBehaviour
     }
 
     private int score;
+    private int currentBonus = 0;
 
-    public void AddScore(int value)
+    public void AddScore(int value, bool wasStunned)
     {
-        score += value;
+        if (wasStunned)
+        {
+            currentBonus = 0;
+        }
+        else currentBonus += value;
+        score += currentBonus;
         onScoreChanged?.Invoke(score);
     }
 

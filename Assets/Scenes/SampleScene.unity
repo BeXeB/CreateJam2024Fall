@@ -2598,6 +2598,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpPower: 10
   maxJumps: 2
+  animator: {fileID: 0}
   groundCheckPosition: {fileID: 1512777880}
   groundCheckSize: {x: 1, y: 0.05}
   groundLayer:
@@ -2757,7 +2758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add9b2c2e7ecd9f49a419eaaecdbb7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 90
+  startTime: 60
   timerTxt: {fileID: 541496861}
   timerSlider: {fileID: 1403872739}
 --- !u!114 &1697015704

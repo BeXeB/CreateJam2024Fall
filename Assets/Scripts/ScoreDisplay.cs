@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class ScoreDisplay : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ScoreDisplay : MonoBehaviour
     private void OnEnable()
     {
         PlayerStats.onScoreChanged += HandleOnScoreChanged;
+        scoreCounter.text = "Score: \n" + 0;
     }
 
     public void HandleOnScoreChanged(int newValue)

@@ -57,10 +57,15 @@ public class AudioMananger : MonoBehaviour
             musicSource.volume = clip.volume;
             musicSource.pitch = clip.pitch;
             musicSource.loop = clip.loop;
+            musicSource.time = clip.time;
             musicSource.Play();
             return;
         }
         Debug.LogError($"Music clip {clipName} not found");
+    }
+    public void StopMusicClip()
+    {
+        musicSource.Pause();
     }
 }
 
@@ -71,5 +76,6 @@ public struct AudioClipData
     public AudioClip clip;
     public float volume;
     public float pitch;
+    public float time;
     public bool loop;
 }

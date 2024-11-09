@@ -8,7 +8,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected int health = 1;
     [SerializeField] protected float stunDuration = 1f;
     [SerializeField] protected int scoreValue = 1;
-    
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -20,7 +20,8 @@ public class EnemyBase : MonoBehaviour
 
     private void Die()
     {
-        PlayerStats.instance.AddScore(scoreValue);
+        AudioMananger.instance.PlayAudioClip("ZombieDead");
+        PlayerStats.instance.AddScore(scoreValue, false);
         Destroy(gameObject);
     }
     
@@ -30,6 +31,7 @@ public class EnemyBase : MonoBehaviour
         var pm = other.gameObject.GetComponent<PlayerMovement>();
         if (pm != null)
         {
+            PlayerStats.instance.AddScore(0, true);
             pm.StartStun(stunDuration);
         }
     }

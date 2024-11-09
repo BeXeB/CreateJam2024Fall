@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class Timer : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class Timer : MonoBehaviour
     private TextMeshProUGUI timerTxt;
     [SerializeField]
     private Slider timerSlider;
+
+    [SerializeField]
+    private GameObject gameOverPanel;
+
+    [SerializeField]
+    private GameObject player;
 
     public float TimeLeft
     {
@@ -31,6 +38,7 @@ public class Timer : MonoBehaviour
     {
         timerOn = true;
         timerSlider.value = 0;
+        timerSlider.maxValue = startTime;
         timeLeft = startTime;
     }
 
@@ -46,6 +54,8 @@ public class Timer : MonoBehaviour
             else
             {
                 Debug.Log("Time is UP!");
+                player.GetComponent<PlayerInput>().DeactivateInput();
+                gameOverPanel.SetActive(true);
                 timeLeft = 0;
                 timerOn = false;
             }

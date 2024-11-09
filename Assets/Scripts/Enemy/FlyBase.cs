@@ -17,6 +17,7 @@ public class FlyBase : MonoBehaviour
     public void SetIsBeingCaptured(bool value)
     {
         isBeingCaptured = value;
+        AudioMananger.instance.PlayAudioClip("GhostDead");
     }
     
     public void CalculatePositionDiff()

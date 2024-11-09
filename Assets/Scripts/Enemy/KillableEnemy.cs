@@ -11,6 +11,7 @@ public class KillableEnemy : EnemyBase
         }
         else
         {
+            AudioMananger.instance.PlayAudioClip("Zombie");
             base.OnCollisionEnter2D(other);
         }
     }
