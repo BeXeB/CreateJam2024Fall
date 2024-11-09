@@ -7,6 +7,7 @@ public class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected int health = 1;
     [SerializeField] protected float stunDuration = 1f;
+    [SerializeField] protected int scoreValue = 1;
     
     public void TakeDamage(int damage)
     {
@@ -19,6 +20,7 @@ public class EnemyBase : MonoBehaviour
 
     private void Die()
     {
+        PlayerStats._instance.AddScore(scoreValue);
         Destroy(gameObject);
     }
     
