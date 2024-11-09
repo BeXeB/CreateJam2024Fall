@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private int maxJumps = 2;
     private int jumpsRemaining;
 
+    public Animator animator;
+
 
     [SerializeField] 
     private Transform groundCheckPosition;
@@ -57,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         }
         GroundCheck();
         Gravity();
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
     }
 
     private void Gravity()
