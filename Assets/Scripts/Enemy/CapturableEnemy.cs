@@ -11,18 +11,18 @@ public class CapturableEnemy : EnemyBase
         }
     }
 
-    public void StartCapture(Transform player)
+    public void StartCapture()
     {
         flyBase.SetIsBeingCaptured(true);
         flyBase.CalculatePositionDiff();
+        flyBase.DisablePathfinding();
     }
     
     public void StopCapture()
     {
         flyBase.SetIsBeingCaptured(false);
+        flyBase.EnablePathfinding();
     }
-    
-    
     
     public void EndCapture()
     {

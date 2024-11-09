@@ -23,7 +23,7 @@ public class FlyTowards : FlyBase
         }
         if (hasHitPlayer)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, -speed * Time.fixedDeltaTime);
+            agent.SetDestination(transform.position + (transform.position - target.position).normalized * aggroRange);
             if (!(Vector2.Distance(transform.position, target.position) > aggroRange)) return;
             hasHitPlayer = false;
             aggroTimer = aggroCooldown;
@@ -31,10 +31,19 @@ public class FlyTowards : FlyBase
         }
         if (aggroTimer > 0) return;
         if (!target) return;
-        if (Vector2.Distance(transform.position, target.position) > aggroRange) return;
+        if (Vector2.Distance(transform.position, target.position) > aggroRange)
+        {
+            var ray = new Ray(transform.position, Vector3.down);
+            var hit = Physics2D.Raycast(ray.origin, ray.direction, floatHeight, LayerMask.GetMask("Ground"));
+            if (!hit.collider || hit.collider.gameObject.layer != LayerMask.NameToLayer("Ground"))
+            {
+                agent.SetDestination(transform.position + Vector3.down);
+            }
+            return;
+        }
         if (Vector2.Distance(transform.position, target.position) > distanceToStop)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+            agent.SetDestination(target.position);
         }
     }
     
