@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private int maxJumps = 2;
     private int jumpsRemaining;
 
+    public Animator animator;
+
 
     [SerializeField] 
     private Transform groundCheckPosition;
@@ -45,8 +47,17 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         rigidBody.velocity = new Vector2(horizontalMovement * moveSpeed, rigidBody.velocity.y);
+        if (horizontalMovement < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if (horizontalMovement > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
         GroundCheck();
         Gravity();
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
     }
 
     private void Gravity()
