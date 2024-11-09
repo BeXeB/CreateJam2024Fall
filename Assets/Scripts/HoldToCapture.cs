@@ -35,7 +35,7 @@ public class HoldToCapture : MonoBehaviour
         {
             isHolding = true;
             if (!capturableEnemy) return;
-            capturableEnemy.StartCapture();
+            capturableEnemy.StartCapture(transform);
             OnHoldComplete += capturableEnemy.EndCapture;
         }
         else if (context.canceled)

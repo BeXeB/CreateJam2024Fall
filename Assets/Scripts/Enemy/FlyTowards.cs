@@ -16,6 +16,11 @@ public class FlyTowards : FlyBase
 
     private void FixedUpdate()
     {
+        if (isBeingCaptured)
+        {
+            transform.position = target.position - positionDiff;
+            return;
+        }
         if (hasHitPlayer)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, -speed * Time.fixedDeltaTime);

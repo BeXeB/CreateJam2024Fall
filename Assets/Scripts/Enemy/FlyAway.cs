@@ -6,6 +6,11 @@ public class FlyAway : FlyBase
     [SerializeField] private float floatHeight = 5f;
     private void FixedUpdate()
     {
+        if (isBeingCaptured)
+        {
+            transform.position = target.position - positionDiff;
+            return;
+        }
         if (!target) return;
         if (Vector2.Distance(transform.position, target.position) < distanceToStop)
         {

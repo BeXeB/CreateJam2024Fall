@@ -3,7 +3,6 @@ using UnityEngine;
 public class CapturableEnemy : EnemyBase
 {
     [SerializeField] private FlyBase flyBase;
-    
     private void Awake()
     {
         if (!flyBase)
@@ -12,17 +11,18 @@ public class CapturableEnemy : EnemyBase
         }
     }
 
-    public void StartCapture()
+    public void StartCapture(Transform player)
     {
-        flyBase.enabled = false;
-        //TODO: Make the enemy follow the player while being captured
+        flyBase.SetIsBeingCaptured(true);
+        flyBase.CalculatePositionDiff();
     }
     
     public void StopCapture()
     {
-        flyBase.enabled = true;
-        //TODO: Make the enemy stop following the player
+        flyBase.SetIsBeingCaptured(false);
     }
+    
+    
     
     public void EndCapture()
     {
