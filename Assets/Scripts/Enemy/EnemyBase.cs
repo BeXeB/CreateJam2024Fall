@@ -20,7 +20,7 @@ public class EnemyBase : MonoBehaviour
 
     private void Die()
     {
-        PlayerStats._instance.AddScore(scoreValue);
+        PlayerStats.instance.AddScore(scoreValue);
         Destroy(gameObject);
     }
     

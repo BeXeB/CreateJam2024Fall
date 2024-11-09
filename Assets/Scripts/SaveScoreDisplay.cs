@@ -22,7 +22,7 @@ public class SaveScoreDisplay : MonoBehaviour
 
     private void HandleSaveButtonPressed()
     {
-        ScoreManager.Record(input.text, PlayerStats._instance.GetScore());
+        ScoreManager.Record(input.text, PlayerStats.instance.GetScore());
         SceneManager.LoadScene(0);
     }
 }

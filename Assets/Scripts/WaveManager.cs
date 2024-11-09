@@ -7,10 +7,19 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private List<Transform> spawnPoints;
-    [SerializeField] private float spawnInterval = 1f;
-    
+    [SerializeField] private float startSpawnInterval = 10f;
+    [SerializeField] private float endSpawnInterval = 0.5f;
+    private float spawnInterval;
+    private Timer timer;
+
+    private void Awake()
+    {
+        timer = FindObjectOfType<Timer>();
+    }
+
     private void Start()
     {
+        spawnInterval = startSpawnInterval;
         StartCoroutine(SpawnEnemies());
     }
     
@@ -27,6 +36,11 @@ public class WaveManager : MonoBehaviour
     
     private void Update()
     {
-        //TODO change the spawn interval based on the timer
+        if (timer.TimeLeft <= 0)
+        {
+            StopCoroutine(SpawnEnemies());
+        }
+        var remainingTimeFraction = timer.TimeLeft / timer.StartTime;
+        spawnInterval = Mathf.Lerp(endSpawnInterval, startSpawnInterval, remainingTimeFraction);
     }
 }

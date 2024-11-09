@@ -7,6 +7,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     [SerializeField]
+    private float startTime = 60f;
     private float timeLeft;
     private bool timerOn = false;
     [SerializeField]
@@ -14,10 +15,23 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private Slider timerSlider;
 
+    public float TimeLeft
+    {
+        get => timeLeft;
+        private set => timeLeft = value;
+    }
+    
+    public float StartTime
+    {
+        get => startTime;
+        private set => startTime = value;
+    }
+    
     void Start()
     {
         timerOn = true;
         timerSlider.value = 0;
+        timeLeft = startTime;
     }
 
     void Update()

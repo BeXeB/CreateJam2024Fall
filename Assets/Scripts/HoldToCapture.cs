@@ -8,12 +8,23 @@ public class HoldToCapture : MonoBehaviour
     [SerializeField] private float holdDuration = 1f;
     [SerializeField] private Image fillCircle;
     private CapturableEnemy capturableEnemy;
+    private CapturableEnemy beingCaptured;
 
     private float holdTimer;
     private bool isHolding;
 
     public static event Action OnHoldComplete;
-    
+
+    private void OnEnable()
+    {
+        PlayerMovement.OnStun += ResetHold;
+    }
+
+    private void OnDisable()
+    {
+        PlayerMovement.OnStun -= ResetHold;
+    }
+
     void Update()
     {
         if (isHolding)
@@ -24,7 +35,7 @@ public class HoldToCapture : MonoBehaviour
             {
                 OnHoldComplete?.Invoke();
                 ResetHold();
-                capturableEnemy = null;
+                beingCaptured = null;
             }
         }
     }
@@ -36,7 +47,8 @@ public class HoldToCapture : MonoBehaviour
             isHolding = true;
             if (!capturableEnemy) return;
             capturableEnemy.StartCapture();
-            OnHoldComplete += capturableEnemy.EndCapture;
+            beingCaptured = capturableEnemy;
+            OnHoldComplete += beingCaptured.EndCapture;
         }
         else if (context.canceled)
         {
@@ -50,7 +62,7 @@ public class HoldToCapture : MonoBehaviour
         holdTimer = 0;
         fillCircle.fillAmount = 0;
         OnHoldComplete = null;
-        capturableEnemy?.StopCapture();
+        beingCaptured?.StopCapture();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

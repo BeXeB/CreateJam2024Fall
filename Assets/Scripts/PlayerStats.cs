@@ -3,16 +3,16 @@ using System;
 
 public class PlayerStats : MonoBehaviour
 {
-    public static PlayerStats _instance;
+    public static PlayerStats instance;
     public static Action<int> onScoreChanged;
 
     private void Awake()
     {
-        if (_instance != null)
+        if (instance != null)
         {
             return;
         }
-        _instance = this;
+        instance = this;
     }
 
     private int score;
