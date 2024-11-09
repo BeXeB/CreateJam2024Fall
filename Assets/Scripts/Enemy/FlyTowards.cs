@@ -4,7 +4,7 @@ public class FlyTowards : FlyBase
 {
     private bool hasHitPlayer;
     [SerializeField] private float aggroCooldown = 1f;
-    [SerializeField] private float aggroTimer;
+    private float aggroTimer;
 
     private void Update()
     {

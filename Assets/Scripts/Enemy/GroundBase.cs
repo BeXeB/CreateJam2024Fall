@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected float speed = 1f;
+    [SerializeField] protected float stoppingDistance = 1f;
+    protected Transform target;
+    protected Rigidbody2D rb;
 
-    // Update is called once per frame
-    void Update()
+    protected void Awake()
     {
-        
+        target = GameObject.Find("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
     }
 }
