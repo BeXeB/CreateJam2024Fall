@@ -65,7 +65,7 @@ public class MainMenu : MonoBehaviour
     {
         AudioMananger.instance.PlayAudioClip("Button");
         AudioMananger.instance.PlayMusicClip("Game");
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene(1);
     }
 
     private void HandleTutorialButtonClicked()

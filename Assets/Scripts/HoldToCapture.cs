@@ -72,7 +72,7 @@ public class HoldToCapture : MonoBehaviour
             capturableEnemy = other.GetComponent<CapturableEnemy>();
         }
     }
-    
+        
     private void OnTriggerExit2D(Collider2D other)
     {
         capturableEnemy = null;
