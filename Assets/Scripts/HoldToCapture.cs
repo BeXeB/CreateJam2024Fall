@@ -15,6 +15,8 @@ public class HoldToCapture : MonoBehaviour
 
     public static event Action OnHoldComplete;
 
+    [SerializeField] private Animator animator;
+
     private void OnEnable()
     {
         PlayerMovement.OnStun += ResetHold;
@@ -44,6 +46,7 @@ public class HoldToCapture : MonoBehaviour
     {
         if (context.started)
         {
+            animator.SetBool("onAttack", true);
             isHolding = true;
             if (!capturableEnemy) return;
             capturableEnemy.StartCapture();
@@ -58,6 +61,7 @@ public class HoldToCapture : MonoBehaviour
 
     private void ResetHold()
     {
+        animator.SetBool("onAttack", false);
         isHolding = false;
         holdTimer = 0;
         fillCircle.fillAmount = 0;
@@ -70,11 +74,24 @@ public class HoldToCapture : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             capturableEnemy = other.GetComponent<CapturableEnemy>();
+            var tempColor = "FDF995";
+            var m_Red = System.Convert.ToByte(tempColor.Substring(0, 2), 16);
+            var m_Green = System.Convert.ToByte(tempColor.Substring(2, 2), 16);
+            var m_Blue = System.Convert.ToByte(tempColor.Substring(4, 2), 16);
+
+            // always requires the alpha parameter
+            var m_NewColor = new UnityEngine.Color32(m_Red, m_Green, m_Blue, 255);
+            capturableEnemy.gameObject.GetComponentInChildren<SpriteRenderer>().color = m_NewColor;
         }
     }
         
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (capturableEnemy)
+        {
+            capturableEnemy.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            capturableEnemy = null;
+        }
         capturableEnemy = null;
     }
 }

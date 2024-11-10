@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdDuration: 1
   fillCircle: {fileID: 4626419737611997784}
+  animator: {fileID: 8949255130900987647}
 --- !u!95 &8949255130900987647
 Animator:
   serializedVersion: 5
