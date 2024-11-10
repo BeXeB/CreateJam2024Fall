@@ -31,7 +31,20 @@ public class FlyBase : MonoBehaviour
         agent.updateUpAxis = false;
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
-    
+
+    private void Update()
+    {
+        var horizontalMovement = agent.velocity.x;
+        if (horizontalMovement < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if (horizontalMovement > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
     public void EnablePathfinding()
     {
         agent.enabled = true;
