@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 1151968089, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1056786419551577332}
   - component: {fileID: 4724647303334614445}
   m_Layer: 6
-  m_Name: CapturableEnemy (1)
+  m_Name: FlyRunTowards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,9 +240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToStop: 1
-  aggroRange: 5
+  aggroRange: 50
   floatHeight: 5
-  aggroCooldown: 1
+  aggroCooldown: 5
 --- !u!195 &4724647303334614445
 NavMeshAgent:
   m_ObjectHideFlags: 0

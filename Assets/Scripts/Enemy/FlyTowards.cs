@@ -1,17 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class FlyTowards : FlyBase
 {
     private bool hasHitPlayer;
     [SerializeField] private float aggroCooldown = 1f;
-    private float aggroTimer;
-
-    private void Update()
+    private bool runningAway;
+    
+    private IEnumerator RunAway()
     {
-        if (aggroTimer > 0)
-        {
-            aggroTimer -= Time.deltaTime;
-        }
+        runningAway = true;
+        yield return new WaitForSeconds(aggroCooldown);
+        runningAway = false;
     }
 
     private void FixedUpdate()
@@ -24,12 +24,11 @@ public class FlyTowards : FlyBase
         if (hasHitPlayer)
         {
             agent.SetDestination(transform.position + (transform.position - target.position).normalized * aggroRange);
-            if (!(Vector2.Distance(transform.position, target.position) > aggroRange)) return;
             hasHitPlayer = false;
-            aggroTimer = aggroCooldown;
+            StartCoroutine(RunAway());
             return;
         }
-        if (aggroTimer > 0) return;
+        if (runningAway) return;
         if (!target) return;
         if (Vector2.Distance(transform.position, target.position) > aggroRange)
         {
