@@ -27,5 +27,6 @@ public class CapturableEnemy : EnemyBase
     public void EndCapture()
     {
         TakeDamage(health);
+        AudioMananger.instance.PlayAudioClip("GhostDead");
     }
 }

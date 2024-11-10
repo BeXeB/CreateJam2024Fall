@@ -20,7 +20,6 @@ public class EnemyBase : MonoBehaviour
 
     private void Die()
     {
-        AudioMananger.instance.PlayAudioClip("ZombieDead");
         PlayerStats.instance.AddScore(scoreValue, false);
         Destroy(gameObject);
     }

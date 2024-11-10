@@ -8,6 +8,7 @@ public class KillableEnemy : EnemyBase
         if (other.contacts[0].normal.y < -0.5f)
         {
             TakeDamage(1);
+            AudioMananger.instance.PlayAudioClip("ZombieDead");
         }
         else
         {
