@@ -73,6 +73,10 @@ public class HoldToCapture : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            if (capturableEnemy)
+            {
+                capturableEnemy.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            }
             capturableEnemy = other.GetComponent<CapturableEnemy>();
             var tempColor = "FDF995";
             var m_Red = System.Convert.ToByte(tempColor.Substring(0, 2), 16);

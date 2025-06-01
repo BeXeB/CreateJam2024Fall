@@ -9,7 +9,7 @@ public class GroundBase : MonoBehaviour
 
     protected void Awake()
     {
-        target = GameObject.Find("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
     }
     

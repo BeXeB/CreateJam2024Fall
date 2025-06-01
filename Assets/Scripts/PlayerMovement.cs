@@ -36,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float fallSpeedMultiplier = 2f;
 
+    [SerializeField]
+    private float stunGracePeriod = 1f;
+    private bool justStunned = false;
+
+
     private PlayerInput playerInput;
     
     public static event Action OnStun;
@@ -105,9 +110,21 @@ public class PlayerMovement : MonoBehaviour
     
     public IEnumerator Stun(float stunDuration)
     {
-        playerInput.DeactivateInput();
-        yield return new WaitForSeconds(stunDuration);
-        playerInput.ActivateInput();
+        if (!justStunned)
+        {
+            playerInput.DeactivateInput();
+            yield return new WaitForSeconds(stunDuration);
+            playerInput.ActivateInput();
+            justStunned = true;
+            StartCoroutine(Grace(stunGracePeriod));
+        }
+
+    }
+
+    public IEnumerator Grace(float graceDuration)
+    {
+        yield return new WaitForSeconds(graceDuration);
+        justStunned = false;
     }
 
     private void GroundCheck()
