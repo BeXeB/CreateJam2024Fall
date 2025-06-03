@@ -98,4 +98,5 @@ public class HoldToCapture : MonoBehaviour
         }
         capturableEnemy = null;
     }
+    // bug stays yellow
 }
